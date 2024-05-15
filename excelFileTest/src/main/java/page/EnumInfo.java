@@ -1,3 +1,5 @@
+package page;
+
 public class EnumInfo {
 
     /**
@@ -9,7 +11,7 @@ public class EnumInfo {
      * Template File Path
      * 报告模版文件地址
      * */
-    public static final String modelFilePath = "IES_IBM進捗報告_模板.xlsx";
+    public static final String modelFilePath = "excelFileTest/IES_IBM進捗報告_模板.xlsx";
     /**
      * Output File Path
      * 输出文件路径（没用到）

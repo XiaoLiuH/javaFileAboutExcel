@@ -1,4 +1,4 @@
-
+package utils;
 
 
 import cn.hutool.poi.excel.ExcelWriter;
@@ -20,7 +20,7 @@ public class ExcelCopyUtils {
      * @param sheet XSSFSheet
      * @param copyValue 新行复制(startRow-1)行的样式,而且在拷贝行的时候可以指定是否需要拷贝值
      */
-    static void insertRow(ExcelWriter writer, int startRow, int rows, XSSFSheet sheet, boolean copyValue) {
+    public static void insertRow(ExcelWriter writer, int startRow, int rows, XSSFSheet sheet, boolean copyValue) {
         if (sheet.getRow(startRow + 1) == null) {
             // 如果复制最后一行，首先需要创建最后一行的下一行，否则无法插入，Bug 2023/03/20修复
             sheet.createRow(startRow + 1);
