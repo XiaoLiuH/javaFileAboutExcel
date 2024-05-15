@@ -42,23 +42,26 @@ public class ExcelFileTest {
 
     public static void main(String[] args){
 
+        postponeTableValue1.clear();
+        postponeTableValue2.clear();
+        postponeTableValue3.clear();
         try {
 //          获取源文件
             File file = new File(EnumInfo.filePath);
 //          根据复制文件获取Workbook类
             Workbook workBook = WorkbookFactory.create(file);
 
-            System.out.println("\n*************************************************************************");
-            System.out.println("workBookSheetNumber:" + workBook.getNumberOfSheets());
+            writeLogToConsole("\n*************************************************************************");
+            writeLogToConsole("workBookSheetNumber:" + workBook.getNumberOfSheets());
 //          根据Sheet名称查找数据
             Sheet modeWBSFileSheet = workBook.getSheet("追加開発_WBS");
-            System.out.println("*************************************************************************");
-            System.out.println("sheetName:" + modeWBSFileSheet.getSheetName());
-            System.out.println("Obtain the corresponding sheet ..........");
-            System.out.println("create new file ..........");
+            writeLogToConsole("*************************************************************************");
+            writeLogToConsole("sheetName:" + modeWBSFileSheet.getSheetName());
+            writeLogToConsole("Obtain the corresponding sheet ..........");
+            writeLogToConsole("create new file ..........");
             String copyPathString = EnumInfo.copyFilePath + "_" + new Date().getTime() + "_" + "IES_IBM進捗報告.xlsx";
             Files.copy(Path.of(EnumInfo.modelFilePath), Path.of(copyPathString));
-            System.out.println("loading ..........");
+            writeLogToConsole("loading ..........");
             DataFormatter formatter = new DataFormatter();
             FileInputStream fis = new FileInputStream(copyPathString);
             copyWorkBook = new XSSFWorkbook(fis);
@@ -192,12 +195,12 @@ public class ExcelFileTest {
 
                 outFile = new FileOutputStream(copyFile);
                 copyWorkBook.write(outFile);
-                System.out.println("file write successful.");
-                System.out.println("new file path: " + copyFile.toPath());
+                writeLogToConsole("file write successful.");
+                writeLogToConsole("new file path: " + copyFile.toPath());
 
             } catch (IOException e) {
 
-                System.out.println("Error writing to file: " + e.getMessage());
+                writeLogToConsole("Error writing to file: " + e.getMessage());
 
             } finally {
                 try {
@@ -205,24 +208,31 @@ public class ExcelFileTest {
                         outFile.close();
                     }
                 } catch (IOException e) {
-                    System.out.println("Error closing file output stream: " + e.getMessage());
+                    writeLogToConsole("Error closing file output stream: " + e.getMessage());
                 }
             }
 
         } catch (FileNotFoundException e) {
 
-            System.out.println("file does not exist");
+            writeLogToConsole("file does not exist");
             e.printStackTrace();
 
         } catch (IOException e) {
 
-            System.out.println("file conversion exception");
+            writeLogToConsole("file conversion exception");
             e.printStackTrace();
 
         }
 
     }
 
+    /**
+     * 向延期明细的表格中插入数据
+     * @param copyWorkBookSheet
+     * @param stateIndex2
+     * @param postponeTableValue2
+     * @param addTableNumber
+     * */
     private static void setTableValue(Sheet copyWorkBookSheet,
                                       int stateIndex2,
                                       List<JSONObject> postponeTableValue2,
@@ -544,6 +554,7 @@ public class ExcelFileTest {
             Font titleFont = copyWorkBook.createFont();
             titleFont.setBold(true);
             titleFont.setColor(IndexedColors.RED.getIndex());
+            titleFont.setFontName("ＭＳ Ｐゴシック");
             cellStyle.setFont(titleFont);
             cellStyle.setAlignment(HorizontalAlignment.CENTER);
             u.setCellStyle(cellStyle);
@@ -595,5 +606,12 @@ public class ExcelFileTest {
             return false;
         }
 
+    }
+
+    /**
+     * 向控制台输出消息
+     * */
+    private static void writeLogToConsole(String msg){
+        System.out.println(String.format("\033[%dm%s\033[0m", 31, msg));
     }
 }
