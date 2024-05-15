@@ -1,10 +1,7 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 import cn.hutool.json.JSONObject;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
@@ -21,6 +18,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import page.EnumInfo;
 import utils.ExcelCopyUtils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class ExcelFileTest {
+public class NewExcelFileTest {
 
     private static Workbook copyWorkBook;
 
@@ -77,7 +77,7 @@ public class ExcelFileTest {
 //                  获取数值
                     String text = formatter.formatCellValue(cell);
 //                  找到对应列
-                    if (columnName.equals("C")) {
+                    if (columnName.equals("D")) {
 //                      计数判断
                         switch (text){
                             case "SAP S/4":
@@ -163,7 +163,7 @@ public class ExcelFileTest {
             int newRowNum = 0;
 
             Double inRowsNum1 = sapY1 + btpY1;
-            if (inRowsNum1.intValue() != 0) {
+            if (inRowsNum1.intValue() != 0 && inRowsNum1.intValue() > 3) {
                 ExcelCopyUtils.insertRow(writer, 44, inRowsNum1.intValue() - 3, sheet, false);
             }
 //          表格第一行地址记录
@@ -172,7 +172,7 @@ public class ExcelFileTest {
             newRowNum += inRowsNum1.intValue() - 3;
 
             Double inRowsNum2 = sapY2 + btpY2;
-            if (inRowsNum2.intValue() != 0) {
+            if (inRowsNum2.intValue() != 0 && inRowsNum2.intValue() > 3) {
                 ExcelCopyUtils.insertRow(writer, 62 + newRowNum, inRowsNum2.intValue() - 3, sheet, false);
             }
 
@@ -180,7 +180,7 @@ public class ExcelFileTest {
             stateIndex2 = 59 + newRowNum;
 
             Double inRowsNum3 = sapY3 + btpY3;
-            if (inRowsNum3.intValue() != 0) {
+            if (inRowsNum3.intValue() != 0 && inRowsNum3.intValue() > 3) {
                 ExcelCopyUtils.insertRow(writer, 80 + newRowNum, inRowsNum3.intValue() - 3, sheet, false);
             }
             stateIndex3 = 77 + newRowNum;
@@ -315,7 +315,7 @@ public class ExcelFileTest {
         }
         setCellValue(copyCell, childName + "総数", fileValuesMap);
 
-        Cell rCell = row.getCell(getColumnIndex("R"));
+        Cell rCell = row.getCell(getColumnIndex("S"));
         if (rCell.getCellType() != CellType.BLANK && rCell.getCellType() != CellType.ERROR && rCell.getCellType() != CellType.STRING) {
             copyCell = copyRow.getCell(8);
             setCellValue(copyCell, childName + "着手可", fileValuesMap);
@@ -325,13 +325,13 @@ public class ExcelFileTest {
             }
         }
 
-        setValueByColName("T", 12, row, copyCell, copyRow, childName + "着手実", fileValuesMap);
+        setValueByColName("U", 12, row, copyCell, copyRow, childName + "着手実", fileValuesMap);
 
-        setValueByColName("S", 14, row, copyCell, copyRow, childName + "引継完予", fileValuesMap);
+        setValueByColName("T", 14, row, copyCell, copyRow, childName + "引継完予", fileValuesMap);
 
-        setValueByColName("U", 16, row, copyCell, copyRow, childName + "引継完実", fileValuesMap);
+        setValueByColName("V", 16, row, copyCell, copyRow, childName + "引継完実", fileValuesMap);
 
-        setPrereciprocalDataAndDelayNumber("Q", "M", "S", "U", copyRow);
+        setPrereciprocalDataAndDelayNumber("O", "Q", "S", "U", copyRow);
 
     }
 
@@ -359,38 +359,38 @@ public class ExcelFileTest {
         }
         setCellValue(copyCell, childName + "総数", fileValuesMap);
 
-        Cell uCell = row.getCell(getColumnIndex("U"));
+        Cell uCell = row.getCell(getColumnIndex("V"));
         if (uCell.getCellType() != CellType.BLANK && uCell.getCellType() != CellType.ERROR && uCell.getCellType() != CellType.STRING) {
             copyCell = copyRow.getCell(8);
             setCellValue(copyCell, childName + "着手可", fileValuesMap);
         }
 
-        setValueByColName("W", 10, row, copyCell, copyRow, childName + "着手予", fileValuesMap);
+        setValueByColName("X", 10, row, copyCell, copyRow, childName + "着手予", fileValuesMap);
 
-        setValueByColName("Y", 12, row, copyCell, copyRow, childName + "着手実", fileValuesMap);
+        setValueByColName("Z", 12, row, copyCell, copyRow, childName + "着手実", fileValuesMap);
 
-        setValueByColName("X", 14, row, copyCell, copyRow, childName + "設計完予", fileValuesMap);
+        setValueByColName("Y", 14, row, copyCell, copyRow, childName + "設計完予", fileValuesMap);
 
-        setValueByColName("Z", 16, row, copyCell, copyRow, childName + "設計完実", fileValuesMap);
+        setValueByColName("AA", 16, row, copyCell, copyRow, childName + "設計完実", fileValuesMap);
 
-        setValueByColName("Z", 18, row, copyCell, copyRow, childName + "引継完実", fileValuesMap);
+//        setValueByColName("AA", 18, row, copyCell, copyRow, childName + "引継完実", fileValuesMap);
 
-        setValueByColName("AC", 20, row, copyCell, copyRow, childName + "ﾚﾋﾞｭｰ完予", fileValuesMap);
+        setValueByColName("AD", 18, row, copyCell, copyRow, childName + "ﾚﾋﾞｭｰ完予", fileValuesMap);
 
-        setValueByColName("AE", 22, row, copyCell, copyRow, childName + "ﾚﾋﾞｭｰ完実", fileValuesMap);
+        setValueByColName("AF", 20, row, copyCell, copyRow, childName + "ﾚﾋﾞｭｰ完実", fileValuesMap);
 
-        Cell y = row.getCell(getColumnIndex("Y"));
-        Cell z = row.getCell(getColumnIndex("Z"));
+        Cell y = row.getCell(getColumnIndex("AD"));
+        Cell z = row.getCell(getColumnIndex("AF"));
 
         if (contrastDate(y) && !contrastDate(z)){
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("機能ID", row.getCell(getColumnIndex("B")).getStringCellValue());
-            jsonObject.put("機能名", row.getCell(getColumnIndex("C")).getStringCellValue());
-            jsonObject.put("担当者", row.getCell(getColumnIndex("AA")).getStringCellValue());
+            jsonObject.put("機能ID", row.getCell(getColumnIndex("C")).getStringCellValue());
+            jsonObject.put("機能名", row.getCell(getColumnIndex("F")).getStringCellValue());
+            jsonObject.put("担当者", row.getCell(getColumnIndex("AB")).getStringCellValue());
             postponeTableValue1.add(jsonObject);
         }
 
-        setPrereciprocalDataAndDelayNumber("Q", "M", "W", "Y", copyRow);
+        setPrereciprocalDataAndDelayNumber("S", "U", "W", "Y", copyRow);
 
     }
 
@@ -413,37 +413,37 @@ public class ExcelFileTest {
         Row copyRow = workBookSheet.getRow(rowNum);
         Cell copyCell = copyRow.getCell(cellNum);
 
-        Cell uCell = row.getCell(getColumnIndex("U"));
+        Cell uCell = row.getCell(getColumnIndex("V"));
         if (uCell.getCellType() != CellType.BLANK && uCell.getCellType() != CellType.STRING) {
             setCellValue(copyCell, childName + "総数", fileValuesMap);
         }
 
         setValueByColName("Z", 8, row, copyCell, copyRow, childName + "着手可", fileValuesMap);
 
-        setValueByColName("AW", 10, row, copyCell, copyRow, childName + "着手予", fileValuesMap);
+        setValueByColName("AX", 10, row, copyCell, copyRow, childName + "着手予", fileValuesMap);
 
-        setValueByColName("AY", 12, row, copyCell, copyRow, childName + "着手実", fileValuesMap);
+        setValueByColName("AZ", 12, row, copyCell, copyRow, childName + "着手実", fileValuesMap);
 
-        setValueByColName("AX", 14, row, copyCell, copyRow, childName + "製造完予", fileValuesMap);
+        setValueByColName("AY", 14, row, copyCell, copyRow, childName + "製造完予", fileValuesMap);
 
-        setValueByColName("AZ", 16, row, copyCell, copyRow, childName + "製造完実", fileValuesMap);
+        setValueByColName("BA", 16, row, copyCell, copyRow, childName + "製造完実", fileValuesMap);
 
-        setValueByColName("BB", 18, row, copyCell, copyRow, childName + "ﾚﾋﾞｭｰ完予", fileValuesMap);
+        setValueByColName("BC", 18, row, copyCell, copyRow, childName + "ﾚﾋﾞｭｰ完予", fileValuesMap);
 
-        setValueByColName("BD", 20, row, copyCell, copyRow, childName + "ﾚﾋﾞｭｰ完実", fileValuesMap);
+        setValueByColName("BE", 20, row, copyCell, copyRow, childName + "ﾚﾋﾞｭｰ完実", fileValuesMap);
 
-        Cell ay = row.getCell(getColumnIndex("AY"));
-        Cell az = row.getCell(getColumnIndex("AZ"));
+        Cell ay = row.getCell(getColumnIndex("BC"));
+        Cell az = row.getCell(getColumnIndex("BE"));
 
         if (contrastDate(ay) && !contrastDate(az)){
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("機能ID", row.getCell(getColumnIndex("B")).getStringCellValue());
-            jsonObject.put("機能名", row.getCell(getColumnIndex("C")).getStringCellValue());
-            jsonObject.put("担当者", row.getCell(getColumnIndex("BA")).getStringCellValue());
+            jsonObject.put("機能ID", row.getCell(getColumnIndex("C")).getStringCellValue());
+            jsonObject.put("機能名", row.getCell(getColumnIndex("D")).getStringCellValue());
+            jsonObject.put("担当者", row.getCell(getColumnIndex("BB")).getStringCellValue());
             postponeTableValue2.add(jsonObject);
         }
 
-        setPrereciprocalDataAndDelayNumber("Q", "M", "W", "Y", copyRow);
+        setPrereciprocalDataAndDelayNumber("U", "S", "W", "Y", copyRow);
 
     }
 
@@ -471,34 +471,34 @@ public class ExcelFileTest {
         }
         setCellValue(copyCell, childName + "機能数", fileValuesMap);
 
-        setValueByColName("AK", getColumnIndex("I"), row, copyCell, copyRow, childName + "UTD完了予", fileValuesMap);
+        setValueByColName("AL", getColumnIndex("I"), row, copyCell, copyRow, childName + "UTD完了予", fileValuesMap);
 
-        setValueByColName("AM", getColumnIndex("K"), row, copyCell, copyRow, childName + "UTD完了実", fileValuesMap);
+        setValueByColName("AN", getColumnIndex("K"), row, copyCell, copyRow, childName + "UTD完了実", fileValuesMap);
 
-        setValueByColName("BJ", getColumnIndex("M"), row, copyCell, copyRow, childName + "ﾃｽﾄ着手予", fileValuesMap);
+        setValueByColName("BK", getColumnIndex("M"), row, copyCell, copyRow, childName + "ﾃｽﾄ着手予", fileValuesMap);
 
-        setValueByColName("BL", getColumnIndex("O"), row, copyCell, copyRow, childName + "ﾃｽﾄ着手実", fileValuesMap);
+        setValueByColName("BM", getColumnIndex("O"), row, copyCell, copyRow, childName + "ﾃｽﾄ着手実", fileValuesMap);
 
-        setValueByColName("BK", getColumnIndex("Q"), row, copyCell, copyRow, childName + "ﾃｽﾄ完予", fileValuesMap);
+        setValueByColName("BL", getColumnIndex("Q"), row, copyCell, copyRow, childName + "ﾃｽﾄ完予", fileValuesMap);
 
-        setValueByColName("BW", getColumnIndex("S"), row, copyCell, copyRow, childName + "ﾃｽﾄ完実", fileValuesMap);
+        setValueByColName("BX", getColumnIndex("S"), row, copyCell, copyRow, childName + "ﾃｽﾄ完実", fileValuesMap);
 
-        setValueByColName("BP", getColumnIndex("U"), row, copyCell, copyRow, childName + "検収完予", fileValuesMap);
+        setValueByColName("BQ", getColumnIndex("U"), row, copyCell, copyRow, childName + "検収完予", fileValuesMap);
 
-        setValueByColName("BR", getColumnIndex("W"), row, copyCell, copyRow, childName + "検収完実", fileValuesMap);
+        setValueByColName("BS", getColumnIndex("W"), row, copyCell, copyRow, childName + "検収完実", fileValuesMap);
 
-        Cell bw = row.getCell(getColumnIndex("BW"));
-        Cell bl = row.getCell(getColumnIndex("BL"));
+        Cell bw = row.getCell(getColumnIndex("BQ"));
+        Cell bl = row.getCell(getColumnIndex("BS"));
 
         if (contrastDate(bw) && !contrastDate(bl)){
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("機能ID", row.getCell(getColumnIndex("B")).getStringCellValue());
-            jsonObject.put("機能名", row.getCell(getColumnIndex("C")).getStringCellValue());
-            jsonObject.put("担当者", row.getCell(getColumnIndex("BN")).getStringCellValue());
+            jsonObject.put("機能ID", row.getCell(getColumnIndex("C")).getStringCellValue());
+            jsonObject.put("機能名", row.getCell(getColumnIndex("D")).getStringCellValue());
+            jsonObject.put("担当者", row.getCell(getColumnIndex("BO")).getStringCellValue());
             postponeTableValue3.add(jsonObject);
         }
 
-        setPrereciprocalDataAndDelayNumber("S", "O", "Y", "AA", copyRow);
+        setPrereciprocalDataAndDelayNumber("W", "U", "Y", "AA", copyRow);
 
     }
 
@@ -546,10 +546,10 @@ public class ExcelFileTest {
         Double mValue = m.getNumericCellValue();
         Integer qValueInt = qValue.intValue();
         Integer mValueInt = mValue.intValue();
-        s.setCellValue(qValueInt <= mValueInt ? 0: qValueInt-mValueInt);
+        s.setCellValue(qValueInt < mValueInt ? mValueInt-qValueInt : 0);
 
         // 遅延数据
-        int i = qValueInt <= mValueInt ? mValueInt - qValueInt : 0;
+        int i = qValueInt > mValueInt ? qValueInt - mValueInt : 0;
         u.setCellValue(i);
         if (i > 0){
             CellStyle cellStyle = copyWorkBook.createCellStyle();
@@ -558,6 +558,7 @@ public class ExcelFileTest {
             titleFont.setColor(IndexedColors.RED.getIndex());
             titleFont.setFontName("ＭＳ Ｐゴシック");
             cellStyle.setFont(titleFont);
+            cellStyle.setBorderBottom(BorderStyle.THIN);
             cellStyle.setAlignment(HorizontalAlignment.CENTER);
             u.setCellStyle(cellStyle);
         }
