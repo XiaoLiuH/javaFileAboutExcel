@@ -22,7 +22,7 @@ public class ExcelCopyUtils {
      */
     public static void insertRow(ExcelWriter writer, int startRow, int rows, XSSFSheet sheet, boolean copyValue) {
         if (sheet.getRow(startRow + 1) == null) {
-            // 如果复制最后一行，首先需要创建最后一行的下一行，否则无法插入，Bug 2023/03/20修复
+            // 如果复制最后一行，首先需要创建最后一行的下一行，否则无法插入
             sheet.createRow(startRow + 1);
         }
 
