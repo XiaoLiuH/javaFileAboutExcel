@@ -1,0 +1,2 @@
+public class qrAnalysisTest {
+}
