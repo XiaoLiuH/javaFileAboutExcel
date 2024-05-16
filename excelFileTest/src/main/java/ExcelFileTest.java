@@ -79,66 +79,65 @@ public class ExcelFileTest {
 //                  找到对应列
                     if (columnName.equals("C")) {
 //                      计数判断
-                        switch (text){
-                            case "SAP S/4":
-                                    setChildNumber1(
-                                            6,
-                                            26,
-                                            text ,
-                                            copyWorkBookSheet ,
-                                            row);
-                                    setChildNumber2(
-                                            6,
-                                            34,
-                                            text,
-                                            copyWorkBookSheet,
-                                            row
-                                    );
-                                    setChildNumber3(
-                                            6,
-                                            52,
-                                            text,
-                                            copyWorkBookSheet,
-                                            row
-                                    );
-                                    setChildNumber4(
-                                            6,
-                                            70,
-                                            text,
-                                            copyWorkBookSheet,
-                                            row
-                                    );
-                                    break;
-                            case "BTP":
-                            case "IBP":
-                                    setChildNumber1(
-                                            6,
-                                            27,
-                                            "BTP",
-                                            copyWorkBookSheet ,
-                                            row);
-                                    setChildNumber2(
-                                            6,
-                                            35,
-                                            "BTP",
-                                            copyWorkBookSheet,
-                                            row
-                                    );
-                                    setChildNumber3(
-                                            6,
-                                            53,
-                                            "BTP",
-                                            copyWorkBookSheet,
-                                            row
-                                    );
-                                    setChildNumber4(
-                                            6,
-                                            71,
-                                            "BTP",
-                                            copyWorkBookSheet,
-                                            row
-                                    );
-                                    break;
+                        switch (text) {
+                            case "SAP S/4" -> {
+                                setChildNumber1(
+                                        6,
+                                        26,
+                                        text,
+                                        copyWorkBookSheet,
+                                        row);
+                                setChildNumber2(
+                                        6,
+                                        34,
+                                        text,
+                                        copyWorkBookSheet,
+                                        row
+                                );
+                                setChildNumber3(
+                                        6,
+                                        52,
+                                        text,
+                                        copyWorkBookSheet,
+                                        row
+                                );
+                                setChildNumber4(
+                                        6,
+                                        70,
+                                        text,
+                                        copyWorkBookSheet,
+                                        row
+                                );
+                            }
+                            case "BTP", "IBP" -> {
+                                setChildNumber1(
+                                        6,
+                                        27,
+                                        "BTP",
+                                        copyWorkBookSheet,
+                                        row);
+                                setChildNumber2(
+                                        6,
+                                        35,
+                                        "BTP",
+                                        copyWorkBookSheet,
+                                        row
+                                );
+                                setChildNumber3(
+                                        6,
+                                        53,
+                                        "BTP",
+                                        copyWorkBookSheet,
+                                        row
+                                );
+                                setChildNumber4(
+                                        6,
+                                        71,
+                                        "BTP",
+                                        copyWorkBookSheet,
+                                        row
+                                );
+                            }
                         }
                     }
 
